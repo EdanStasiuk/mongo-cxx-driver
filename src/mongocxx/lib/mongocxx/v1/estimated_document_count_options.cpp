@@ -18,6 +18,7 @@
 
 #include <bsoncxx/v1/stdx/optional.hpp>
 
+#include <mongocxx/v1/read_concern.hpp>
 #include <mongocxx/v1/read_preference.hpp>
 
 #include <bsoncxx/v1/types/value.hh>
@@ -34,6 +35,7 @@ class estimated_document_count_options::impl {
     bsoncxx::v1::stdx::optional<std::chrono::milliseconds> _max_time;
     bsoncxx::v1::stdx::optional<bsoncxx::v1::types::value> _comment;
     bsoncxx::v1::stdx::optional<v1::read_preference> _read_preference;
+    bsoncxx::v1::stdx::optional<v1::read_concern> _read_concern;
 
     static impl const& with(estimated_document_count_options const& self) {
         return *static_cast<impl const*>(self._impl);
@@ -117,6 +119,15 @@ bsoncxx::v1::stdx::optional<v1::read_preference> estimated_document_count_option
     return impl::with(this)->_read_preference;
 }
 
+estimated_document_count_options& estimated_document_count_options::read_concern(v1::read_concern rc) {
+    impl::with(this)->_read_concern = std::move(rc);
+    return *this;
+}
+
+bsoncxx::v1::stdx::optional<v1::read_concern> estimated_document_count_options::read_concern() const {
+    return impl::with(this)->_read_concern;
+}
+
 bsoncxx::v1::stdx::optional<bsoncxx::v1::types::value> const& estimated_document_count_options::internal::comment(
     estimated_document_count_options const& self) {
     return impl::with(self)._comment;
@@ -127,14 +138,19 @@ bsoncxx::v1::stdx::optional<v1::read_preference> const& estimated_document_count
     return impl::with(self)._read_preference;
 }
 
+bsoncxx::v1::stdx::optional<v1::read_concern> const& estimated_document_count_options::internal::read_concern(
+    estimated_document_count_options const& self) {
+    return impl::with(self)._read_concern;
+}
+
 bsoncxx::v1::stdx::optional<bsoncxx::v1::types::value>& estimated_document_count_options::internal::comment(
     estimated_document_count_options& self) {
     return impl::with(self)._comment;
 }
 
-bsoncxx::v1::stdx::optional<v1::read_preference>& estimated_document_count_options::internal::read_preference(
+bsoncxx::v1::stdx::optional<v1::read_concern>& estimated_document_count_options::internal::read_concern(
     estimated_document_count_options& self) {
-    return impl::with(self)._read_preference;
+    return impl::with(self)._read_concern;
 }
 
 } // namespace v1

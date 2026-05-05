@@ -246,6 +246,10 @@ void append_to(v1::estimated_document_count_options const& opts, scoped_bson& do
         doc += scoped_bson(BCON_NEW("maxTimeMS", BCON_INT64(std::int64_t{opt->count()})));
     }
 
+    if (auto const& opt = v1::estimated_document_count_options::internal::read_concern(opts)) {
+        doc += scoped_bson{BCON_NEW("readConcern", BCON_DOCUMENT(scoped_bson{opt->to_document()}.bson()))};
+    }
+
     if (auto const& opt = v1::estimated_document_count_options::internal::comment(opts)) {
         append_comment(*opt, doc);
     }

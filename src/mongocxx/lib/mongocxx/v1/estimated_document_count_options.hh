@@ -20,6 +20,7 @@
 
 #include <bsoncxx/v1/types/value-fwd.hpp>
 
+#include <mongocxx/v1/read_concern-fwd.hpp>
 #include <mongocxx/v1/read_preference-fwd.hpp>
 
 #include <bsoncxx/v1/stdx/optional.hpp>
@@ -33,9 +34,12 @@ class estimated_document_count_options::internal {
         estimated_document_count_options const& self);
     static bsoncxx::v1::stdx::optional<v1::read_preference> const& read_preference(
         estimated_document_count_options const& self);
+    static bsoncxx::v1::stdx::optional<v1::read_concern> const& read_concern(
+        estimated_document_count_options const& self);
 
     static bsoncxx::v1::stdx::optional<bsoncxx::v1::types::value>& comment(estimated_document_count_options& self);
     static bsoncxx::v1::stdx::optional<v1::read_preference>& read_preference(estimated_document_count_options& self);
+    static bsoncxx::v1::stdx::optional<v1::read_concern>& read_concern(estimated_document_count_options& self);
 };
 
 } // namespace v1

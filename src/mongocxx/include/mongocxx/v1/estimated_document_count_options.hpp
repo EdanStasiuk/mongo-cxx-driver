@@ -23,6 +23,7 @@
 #include <bsoncxx/v1/types/value-fwd.hpp>
 #include <bsoncxx/v1/types/view-fwd.hpp>
 
+#include <mongocxx/v1/read_concern-fwd.hpp>
 #include <mongocxx/v1/read_preference-fwd.hpp>
 
 #include <bsoncxx/v1/stdx/optional.hpp>
@@ -40,6 +41,7 @@ namespace v1 {
 /// Supported fields include:
 /// - `comment`
 /// - `max_time` ("maxTimeMS")
+/// - `read_concern` ("readConcern")
 /// - `read_preference` ("readPreference")
 ///
 /// @see
@@ -124,6 +126,16 @@ class estimated_document_count_options {
     /// Return the current "readPreference" field.
     ///
     MONGOCXX_ABI_EXPORT_CDECL(bsoncxx::v1::stdx::optional<v1::read_preference>) read_preference() const;
+
+    ///
+    /// Set the "readConcern" field.
+    ///
+    MONGOCXX_ABI_EXPORT_CDECL(estimated_document_count_options&) read_concern(v1::read_concern rc);
+
+    ///
+    /// Return the current "readConcern" field.
+    ///
+    MONGOCXX_ABI_EXPORT_CDECL(bsoncxx::v1::stdx::optional<v1::read_concern>) read_concern() const;
 
     class internal;
 };

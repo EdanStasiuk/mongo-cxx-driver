@@ -27,8 +27,8 @@ namespace options {
 estimated_document_count::estimated_document_count(v1::estimated_document_count_options opts)
     : _max_time{opts.max_time()},
       _comment{std::move(v1::estimated_document_count_options::internal::comment(opts))},
-      _read_preference{std::move(v1::estimated_document_count_options::internal::read_preference(opts))} {}
-
+      _read_preference{std::move(v1::estimated_document_count_options::internal::read_preference(opts))},
+      _read_concern{std::move(v1::estimated_document_count_options::internal::read_concern(opts))} {}
 } // namespace options
 } // namespace v_noabi
 } // namespace mongocxx
